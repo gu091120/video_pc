@@ -1,0 +1,12 @@
+{
+    "restartable": "rs",
+    "ignore": [".git", "node_modules/**/node_modules", "lib"],
+    "verbose": true,
+    "env": {
+        "NODE_ENV": "development",
+        "SIGN_KEY": "1234567890",
+        "LOG_URL": "http://10.100.98.93:9999/log",
+        "baseURL": "http://web-merchantWallet-vip/merchantWallet/front"
+    },
+    "ext": "js json"
+}
