@@ -1,4 +1,4 @@
-import { openUrl } from "./util.js";
+import { openUrl } from "./pageControl.js";
 
 const MOVIE_ITEM_SELECTORS = ".stui-vodlist > li";
 
