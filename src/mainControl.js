@@ -3,7 +3,6 @@ const PAGESTACKNUM = 5;
 import { taskSelect, URLTYPE } from "./taskControl.js";
 import { pageStack, getRunningPages } from "./pageControl.js";
 import { urlStack } from "./urlStack";
-
 const MAIN_URL = "https://www.4kdy.net/";
 
 class MainControl {

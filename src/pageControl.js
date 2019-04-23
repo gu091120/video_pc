@@ -1,7 +1,8 @@
 import StackPool from "./stackPool";
+
 import puppeteer from "puppeteer";
 
-const HEADLESS = false;
+const HEADLESS = true;
 let browser = null;
 let count = 0;
 
@@ -109,5 +110,17 @@ export const getRunningPages = () => {
     return new Promise(async (resolve, reject) => {
         const num = await browser.pages();
         resolve(num.length);
+    });
+};
+
+export const openUrl = (url, page, opt) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            await page.goto(url);
+            resolve(page);
+        } catch (e) {
+            console.log("error" + e);
+            reject(e);
+        }
     });
 };

@@ -4,6 +4,7 @@ import {
     getVideoTypeUrlList,
     getVideoDetail
 } from "./tasks";
+import { videoInfoSaveToDb, videoSaveToDb } from "./mongodb/index";
 
 import { urlStack } from "./urlStack";
 
@@ -40,7 +41,7 @@ export const getVideoAllTypeUrlListTask = url => page => {
                     url_type: URLTYPE.ALL_VIDEO
                 });
             });
-            saveInfo({ AllTypeUrlListTask: all_video_type });
+            //saveInfo({ AllTypeUrlListTask: all_video_type });
             resolve(arr);
         } catch (e) {
             reject(e);
@@ -55,7 +56,7 @@ export const getVideoListTask = url => page => {
             const arr = moive_item_list.map(url => {
                 urlStack.addStack({ url_type: URLTYPE.VIDE_INFO, url });
             });
-            saveInfo({ getVideoListTask: moive_item_list });
+            //saveInfo({ getVideoListTask: moive_item_list });
             resolve(arr);
         } catch (e) {
             reject(e);
@@ -70,7 +71,8 @@ export const getVideInfoTask = url => page => {
             const arr = info.video_play_url.map(url => {
                 urlStack.addStack({ url_type: URLTYPE.VIDEO_DETAIL, url });
             });
-            saveInfo({ getVideInfoTask: info });
+            videoInfoSaveToDb(info);
+            //saveInfo({ getVideInfoTask: info });
             resolve(arr);
         } catch (e) {
             reject(e);
@@ -82,7 +84,9 @@ export const getVideoDetailTask = url => page => {
     return new Promise(async (resolve, reject) => {
         try {
             const info = await getVideoDetail(url, page);
-            saveInfo({ getVideoDetailTask: info });
+            //saveInfo({ getVideoDetailTask: info });
+            info.parent_url = url;
+            videoSaveToDb(info);
             resolve(info);
         } catch (e) {
             reject(e);
